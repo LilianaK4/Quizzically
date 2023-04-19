@@ -1,47 +1,27 @@
 package pl.lilianakrol.quizzically.models;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import jakarta.persistence.*;
-
-import lombok.Data;
-
-
-@Data
-@Entity
-@Table(name = "questions")
-public
-class Question {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long idQuestion;
-
-    @Column(name = "question", nullable = false, columnDefinition = "TEXT")
+public class Question {
     private String question;
+    private List<String> answers;
+    private int correctAnswer;
 
-    @Column(name = "aAnswer", columnDefinition = "TEXT")
-    private String aAnswer;
-
-    @Column(name = "bAnswer", columnDefinition = "TEXT")
-    private String bAnswer;
-
-    @Column(name = "cAnswer", columnDefinition = "TEXT")
-    private String cAnswer;
-
-    @Column(name = "dAnswer", columnDefinition = "TEXT")
-    private String dAnswer;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_quiz", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private Quiz idQuiz;
-
-    public Question() {
+    public Question(String question, List<String> answers, int correctAnswer) {
+        this.question = question;
+        this.answers = answers;
+        this.correctAnswer = correctAnswer;
     }
 
+    public String getQuestion() {
+        return question;
+    }
+
+    public List<String> getAnswers() {
+        return answers;
+    }
+
+    public int getCorrectAnswer() {
+        return correctAnswer;
+    }
 }

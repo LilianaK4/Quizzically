@@ -16,22 +16,26 @@ import pl.lilianakrol.quizzically.models.User;
 @RequestMapping("/api/user")
 public class UserController {
 
-     @PostMapping() User createUser(@RequestBody User user)
+     @PostMapping()
+     User createUser(@RequestBody User user)
      {
          return user;
      }
 
-     @GetMapping("/{idUser}") User getUserById(@PathVariable long idUser)
+     @GetMapping("/{idUser}")
+     User getUserById(@PathVariable long idUser)
      {
          return null;
      }
 
-     @PutMapping("/{idUser}") User updateUserById(@RequestBody User user, @PathVariable long idUser)
+     @PutMapping("/{idUser}")
+     User updateUserById(@RequestBody User user, @PathVariable long idUser)
      {
          return user;
      }
 
-     @DeleteMapping("/{idUser}") void deleteUser(@PathVariable long idUser)
+     @DeleteMapping("/{idUser}")
+     void deleteUser(@PathVariable long idUser)
      {
          return;
      }

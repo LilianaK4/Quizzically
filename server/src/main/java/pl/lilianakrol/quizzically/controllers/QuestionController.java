@@ -17,23 +17,26 @@ import pl.lilianakrol.quizzically.models.Question;
 @RequestMapping("/api/question")
 public class QuestionController {
 
-     @PostMapping() Question createQuiz(@RequestBody Question question)
+     @PostMapping()
+     Question createQuiz(@RequestBody Question question)
      {
          return question;
      }
 
-     @GetMapping("/{idQuestion}") Question getQuestionById(@PathVariable long idQuestion)
+     @GetMapping("/{idQuestion}")
+     Question getQuestionById(@PathVariable long idQuestion)
      {
          return null;
      }
 
-     @PutMapping("/{idQuestion}") Question updateQuestionById(@RequestBody
-     Question question, @PathVariable long idQuestion)
+     @PutMapping("/{idQuestion}")
+     Question updateQuestionById(@RequestBody Question question, @PathVariable long idQuestion)
      {
          return null;
      }
 
-     @DeleteMapping("/{idQuestion}") void deleteQuestionById(@PathVariable long idQuestion)
+     @DeleteMapping("/{idQuestion}")
+     void deleteQuestionById(@PathVariable long idQuestion)
      {
          return;
      }

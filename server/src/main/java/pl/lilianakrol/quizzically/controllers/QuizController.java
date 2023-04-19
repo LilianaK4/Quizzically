@@ -15,22 +15,26 @@ import pl.lilianakrol.quizzically.models.Quiz;
 @RequestMapping("/api/quiz")
 public class QuizController {
 
-     @PostMapping() Quiz createQuiz(@RequestBody Quiz quiz)
+     @PostMapping()
+     Quiz createQuiz(@RequestBody Quiz quiz)
      {
          return quiz;
      }
 
-     @GetMapping("/{idQuiz}") Quiz getQuizById(@PathVariable long idQuiz)
+     @GetMapping("/{idQuiz}")
+     Quiz getQuizById(@PathVariable long idQuiz)
      {
          return null;
      }
 
-     @PutMapping("/{idQuiz}") Quiz updateQuizById(@RequestBody Quiz quiz, @PathVariable long idQuiz)
+     @PutMapping("/{idQuiz}")
+     Quiz updateQuizById(@RequestBody Quiz quiz, @PathVariable long idQuiz)
      {
          return null;
      }
 
-     @DeleteMapping("/{idQuiz}") void deleteQuizById(@PathVariable long idQuiz)
+     @DeleteMapping("/{idQuiz}")
+     void deleteQuizById(@PathVariable long idQuiz)
      {
      return;
      }
