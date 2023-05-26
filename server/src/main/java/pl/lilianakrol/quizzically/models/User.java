@@ -26,10 +26,6 @@ class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Lob
-    @Column(name = "photo", nullable = true)
-    private String photo;
-
     public User() {
     }
 
