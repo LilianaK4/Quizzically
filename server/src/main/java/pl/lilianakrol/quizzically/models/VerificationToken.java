@@ -19,4 +19,20 @@ public class VerificationToken {
     @OneToOne(fetch = LAZY)
     private User user;
     private Instant expiryDate;
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
 }
