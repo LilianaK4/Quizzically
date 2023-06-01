@@ -64,16 +64,21 @@ public class AuthService {
         return token;
     }
 
-    public void verifyAccount(String token) {
+    public boolean verifyAccount(String token) {
         Optional<VerificationToken> verificationToken = verificationTokenRepository.findByToken(token);
         verificationToken.orElseThrow(() -> new QuizzicallyException("Invalid Token"));
-        fetchUserAndEnable(verificationToken.get());
+        return fetchUserAndEnable(verificationToken.get());
     }
 
-    private void fetchUserAndEnable(VerificationToken verificationToken) {
+    private boolean fetchUserAndEnable(VerificationToken verificationToken) {
         String username = verificationToken.getUser().getUsername();
         User user = userRepository.findByUsername(username).orElseThrow(() -> new QuizzicallyException("User not found with username - " + username));
-        user.setEnabled(true);
-        userRepository.save(user);
+        if (!user.isEnabled()) {
+            user.setEnabled(true);
+            userRepository.save(user);
+            return true;
+        }
+        else
+            return false;
     }
 }
