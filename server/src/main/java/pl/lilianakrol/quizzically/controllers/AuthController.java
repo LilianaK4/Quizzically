@@ -7,11 +7,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.lilianakrol.quizzically.dto.AuthenticationResponse;
 import pl.lilianakrol.quizzically.dto.LoginRequest;
+import pl.lilianakrol.quizzically.dto.RefreshTokenRequest;
 import pl.lilianakrol.quizzically.dto.RegisterRequest;
 import pl.lilianakrol.quizzically.models.User;
 import pl.lilianakrol.quizzically.repositories.UserRepository;
 import pl.lilianakrol.quizzically.repositories.VerificationTokenRepository;
 import pl.lilianakrol.quizzically.service.AuthService;
+import pl.lilianakrol.quizzically.service.RefreshTokenService;
+
+import javax.validation.Valid;
 
 import static org.springframework.http.HttpStatus.OK;
 
@@ -21,6 +25,7 @@ import static org.springframework.http.HttpStatus.OK;
 public class AuthController {
 
     private final AuthService authService;
+    private final RefreshTokenService refreshTokenService;
 
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody RegisterRequest registerRequest) {
@@ -43,6 +48,15 @@ public class AuthController {
         return authService.login(loginRequest);
     }
 
+    @PostMapping("/refresh/token")
+    public AuthenticationResponse refreshTokens(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
+        return authService.refreshToken(refreshTokenRequest);
+    }
 
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
+        refreshTokenService.deleteRefreshToken(refreshTokenRequest.getRefreshToken());
+        return ResponseEntity.status(OK).body("Refresh Token Deleted Successfully!!");
+    }
 
 }
