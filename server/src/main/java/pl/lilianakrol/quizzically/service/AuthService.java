@@ -47,7 +47,7 @@ public class AuthService {
         // Publikowanie wiadomości do RabbitMQ
         NotificationEmail notificationEmail = new NotificationEmail("Quizzically - please activate your account", user.getEmail(),
                 "Thank you for signing up to Quizzically, please click on the link below to activate your account: "
-                        + "http://localhost:8080/accountVerification/" + token);
+                        + "http://localhost:8080/api/auth/accountVerification/" + token);
         rabbitTemplate.convertAndSend("quizzically_verification_queue", notificationEmail);
 
     }
