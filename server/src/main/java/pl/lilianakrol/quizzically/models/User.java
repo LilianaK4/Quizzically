@@ -34,6 +34,8 @@ class User {
     private String password;
     private Instant created;
 
+    private boolean enabled;
+
     public long getIdUser() {
         return idUser;
     }

@@ -18,6 +18,7 @@ public class VerificationToken {
     private String token;
     @OneToOne(fetch = LAZY)
     private User user;
+    private Instant expiryDate;
 
     public Long getId() {
         return id;
@@ -35,7 +36,6 @@ public class VerificationToken {
         this.expiryDate = expiryDate;
     }
 
-    private Instant expiryDate;
 
     public void setToken(String token) {
         this.token = token;
