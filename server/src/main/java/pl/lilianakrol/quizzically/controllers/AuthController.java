@@ -1,17 +1,12 @@
 package pl.lilianakrol.quizzically.controllers;
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.lilianakrol.quizzically.dto.AuthenticationResponse;
 import pl.lilianakrol.quizzically.dto.LoginRequest;
 import pl.lilianakrol.quizzically.dto.RefreshTokenRequest;
 import pl.lilianakrol.quizzically.dto.RegisterRequest;
-import pl.lilianakrol.quizzically.models.User;
-import pl.lilianakrol.quizzically.repositories.UserRepository;
-import pl.lilianakrol.quizzically.repositories.VerificationTokenRepository;
 import pl.lilianakrol.quizzically.service.AuthService;
 import pl.lilianakrol.quizzically.service.RefreshTokenService;
 

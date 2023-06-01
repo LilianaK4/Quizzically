@@ -1,8 +1,8 @@
 package pl.lilianakrol.quizzically.service;
 
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.lilianakrol.quizzically.exceptions.QuizzicallyException;
 import pl.lilianakrol.quizzically.models.RefreshToken;
 import pl.lilianakrol.quizzically.repositories.RefreshTokenRepository;
@@ -15,7 +15,7 @@ import java.util.UUID;
 @Transactional
 public class RefreshTokenService {
 
-    private RefreshTokenRepository refreshTokenRepository;
+    private final RefreshTokenRepository refreshTokenRepository;
 
     public RefreshToken generateRefreshToken() {
         RefreshToken refreshToken = new RefreshToken();
@@ -33,5 +33,4 @@ public class RefreshTokenService {
     public void deleteRefreshToken(String token) {
         refreshTokenRepository.deleteByToken(token);
     }
-
 }
