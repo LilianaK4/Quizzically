@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.lilianakrol.quizzically.dto.RegisterRequest;
+import pl.lilianakrol.quizzically.exceptions.SpringQuizzicallyException;
 import pl.lilianakrol.quizzically.models.User;
 import pl.lilianakrol.quizzically.models.VerificationToken;
 import pl.lilianakrol.quizzically.repositories.UserRepository;
 import pl.lilianakrol.quizzically.repositories.VerificationTokenRepository;
 
 import java.time.Instant;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -46,5 +48,18 @@ public class AuthService {
 
         verificationTokenRepository.save(verificationToken);
         return token;
+    }
+
+    public void verifyAccount(String token) {
+        Optional<VerificationToken> verificationToken = verificationTokenRepository.findByToken(token);
+        verificationToken.orElseThrow(() -> new SpringQuizzicallyException("Invalid Token"));
+        fetchUser(verificationToken.get());
+    }
+
+    @Transactional
+    private void fetchUser(VerificationToken verificationToken) {
+        String username = verificationToken.getUser().getUsername();
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new SpringQuizzicallyException("User not found with username: " + username));
+        userRepository.save(user);
     }
 }

@@ -18,6 +18,23 @@ public class VerificationToken {
     private String token;
     @OneToOne(fetch = LAZY)
     private User user;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Instant getExpiryDate() {
+        return expiryDate;
+    }
+
+    public void setExpiryDate(Instant expiryDate) {
+        this.expiryDate = expiryDate;
+    }
+
     private Instant expiryDate;
 
     public void setToken(String token) {
