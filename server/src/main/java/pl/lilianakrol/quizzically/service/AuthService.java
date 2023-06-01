@@ -4,8 +4,14 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.lilianakrol.quizzically.dto.AuthenticationResponse;
+import pl.lilianakrol.quizzically.dto.LoginRequest;
 import pl.lilianakrol.quizzically.dto.RegisterRequest;
 import pl.lilianakrol.quizzically.exceptions.QuizzicallyException;
 import pl.lilianakrol.quizzically.models.NotificationEmail;
@@ -13,6 +19,7 @@ import pl.lilianakrol.quizzically.models.User;
 import pl.lilianakrol.quizzically.models.VerificationToken;
 import pl.lilianakrol.quizzically.repositories.UserRepository;
 import pl.lilianakrol.quizzically.repositories.VerificationTokenRepository;
+import pl.lilianakrol.quizzically.security.JwtProvider;
 
 import java.time.Instant;
 import java.util.Optional;
@@ -26,7 +33,8 @@ public class AuthService {
     private PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final VerificationTokenRepository verificationTokenRepository;
-    private final MailService mailService;
+    private final AuthenticationManager authenticationManager;
+    private final JwtProvider jwtProvider;
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
@@ -80,5 +88,13 @@ public class AuthService {
         }
         else
             return false;
+    }
+
+    public AuthenticationResponse login(LoginRequest loginRequest) {
+        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
+                loginRequest.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authenticate);
+        String token = jwtProvider.generateToken(authenticate);
+        return new AuthenticationResponse(token, loginRequest.getUsername());
     }
 }
