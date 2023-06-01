@@ -2,6 +2,7 @@ package pl.lilianakrol.quizzically.service;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,9 @@ public class AuthService {
     private final UserRepository userRepository;
     private final VerificationTokenRepository verificationTokenRepository;
     private final MailService mailService;
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
 
     @Transactional
     public void signup(RegisterRequest registerRequest) {
@@ -39,10 +43,17 @@ public class AuthService {
         user.setEnabled(false);
         userRepository.save(user);
         String token = generateVerificationToken(user);
-        mailService.sendMail(new NotificationEmail("Quizzically - please activate your account", user.getEmail()
-                , "Thank you for signing up to Quizzically, please click on the link below to activate your account: "
-                + "http://localhost:8080/accountVerification/" + token));
+
+        // Publikowanie wiadomości do RabbitMQ
+        NotificationEmail notificationEmail = new NotificationEmail("Quizzically - please activate your account", user.getEmail(),
+                "Thank you for signing up to Quizzically, please click on the link below to activate your account: "
+                        + "http://localhost:8080/accountVerification/" + token);
+        rabbitTemplate.convertAndSend("quizzically_verification_queue", notificationEmail);
+
     }
+
+
+
 
     private String generateVerificationToken(User user) {
         String token = UUID.randomUUID().toString();
