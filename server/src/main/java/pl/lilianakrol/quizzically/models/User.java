@@ -34,6 +34,8 @@ class User {
     private String password;
     private Instant created;
 
+    private boolean enabled;
+
     public long getIdUser() {
         return idUser;
     }
@@ -91,4 +93,11 @@ class User {
     }
 
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 }
