@@ -2,13 +2,33 @@ html,
 body {
   height: 100%;
   overflow: hidden;
-}
-body {
+  font-family: Raleway;
   margin: 0;
   background-color: #F5F5F5;
   background: linear-gradient(180deg, #D8A2FB 0%, rgba(227, 170, 237, 0.582656) 39.06%, rgba(242, 181, 218, 0) 100%);
 }
 
 * {
-  font-size: 16px;
+  font-size: 18px;
 }
+
+
+.quizzically-primary-button {
+    background: #EBC2E1;
+    border-radius: 19px;
+    width: 50%;
+    border: none;
+    color: white;
+    line-height: 2.5em;
+}
+
+
+.quizzically-secondary-button {
+    background-color: lightgrey;
+    border-radius: 19px;
+    width: 40%;
+    border: none;
+    color: white;
+    line-height: 2.5em;
+}
+
