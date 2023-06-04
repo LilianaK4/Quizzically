@@ -1,36 +1,23 @@
 package pl.lilianakrol.quizzically.models;
 
-import jakarta.persistence.ElementCollection;
+import jakarta.persistence.*;
+import lombok.*;
 
-import javax.persistence.*;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "questions")
+@Getter
+@Setter
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
+
     private String content;
-    @ElementCollection
-    private List<String> answers;
-    private int correctAnswer;
 
-    public Question(String content, List<String> answers, int correctAnswer) {
-        this.content = content;
-        this.answers = answers;
-        this.correctAnswer = correctAnswer;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public List<String> getAnswers() {
-        return answers;
-    }
-
-    public int getCorrectAnswer() {
-        return correctAnswer;
-    }
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "question_id")
+    private List<Answer> answers;
 }
