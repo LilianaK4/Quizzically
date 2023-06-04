@@ -64,8 +64,6 @@ public class AuthService {
     }
 
 
-
-
     private String generateVerificationToken(User user) {
         String token = UUID.randomUUID().toString();
         VerificationToken verificationToken = new VerificationToken();

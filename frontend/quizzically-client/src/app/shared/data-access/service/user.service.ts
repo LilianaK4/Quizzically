@@ -6,6 +6,9 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { LoginModel } from '../../../models/login.model';
 import { AuthenticatedResponse } from '../../../models/authenticated-response.model';
 import { HttpClient } from '@angular/common/http';
+import { SignUpModel } from 'src/app/models/signUp.model';
+import { JwtModule } from '@auth0/angular-jwt';
+
 
 
 
@@ -14,10 +17,11 @@ import { HttpClient } from '@angular/common/http';
     providedIn: 'root',
   })
   export class UserService {
+    registerUser(userData: SignUpModel) {
+      throw new Error('Method not implemented.');
+    }
     private user = new BehaviorSubject<User | null>(null);
     public user$ = this.user.asObservable();
-    private isAdmin = new BehaviorSubject<boolean>(false);
-    public isAdmin$ = this.isAdmin.asObservable();
   
     constructor(
       private http: HttpClient,
@@ -35,6 +39,8 @@ import { HttpClient } from '@angular/common/http';
       if (!!token && !this.jwtHelper.isTokenExpired(token)) return true;
       return false;
     }
+
+
   
     public login(loginModel: LoginModel): Observable<boolean> {
       return this.http
@@ -67,7 +73,6 @@ import { HttpClient } from '@angular/common/http';
   
     private clearUser() {
       this.user.next(null);
-      this.isAdmin.next(false);
     }
   }
   
