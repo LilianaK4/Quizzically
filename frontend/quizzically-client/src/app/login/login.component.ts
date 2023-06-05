@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   async ngOnInit() {
     if (this.userService.isUserAuthenticated) {
-      await this.router.navigate(['/']);
+      await this.router.navigate(['/main-menu']);
     }
   }
 
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
     };
     this.userService.login(credentials).subscribe(loggedIn => {
       (async () => {
-        if (loggedIn) await this.router.navigate(['/']);
+        if (loggedIn) await this.router.navigate(['/main-menu']);
       })();
     });
   }

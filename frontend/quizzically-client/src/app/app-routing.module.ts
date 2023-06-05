@@ -3,17 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { QuestionComponent } from './question/question.component';
-import { authGuard } from './shared/auth/auth.guard';
+import { AuthGuard } from './shared/auth/auth.guard';
 import { SignUpComponent } from './sign-up/sign-up.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'question', component: QuestionComponent },
-  { path: 'main-menu', component: MainMenuComponent },
+  { path: 'main-menu', component: MainMenuComponent, canActivate: [AuthGuard]},
   {
     path: '',
-    canActivate: [authGuard],
+    canActivate: [AuthGuard],
     children: [
      /* {
         path: 'admin-panel',

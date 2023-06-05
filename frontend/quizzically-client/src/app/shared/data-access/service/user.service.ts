@@ -33,12 +33,14 @@ import { JwtModule } from '@auth0/angular-jwt';
         this.setUser({ authenticationToken: token } as AuthenticatedResponse);
       else this.tokenService.clearToken();
     }
+    
   
     public get isUserAuthenticated(): boolean {
       const token = this.tokenService.getToken();
       if (!!token && !this.jwtHelper.isTokenExpired(token)) return true;
       return false;
     }
+    
 
 
   
