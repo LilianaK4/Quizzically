@@ -8,7 +8,7 @@ export class TokenService {
   private static tokenFieldName = 'access_token';
 
   public setToken(authResponse: AuthenticatedResponse): void {
-    localStorage.setItem(TokenService.tokenFieldName, authResponse.token);
+    localStorage.setItem(TokenService.tokenFieldName, authResponse.authenticationToken);
   }
 
   public getToken(): string | null {

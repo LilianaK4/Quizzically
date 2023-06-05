@@ -30,21 +30,23 @@ import { JwtModule } from '@auth0/angular-jwt';
     ) {
       const token = this.tokenService.getToken();
       if (!!token && !this.jwtHelper.isTokenExpired(token))
-        this.setUser({ token: token } as AuthenticatedResponse);
+        this.setUser({ authenticationToken: token } as AuthenticatedResponse);
       else this.tokenService.clearToken();
     }
+    
   
     public get isUserAuthenticated(): boolean {
       const token = this.tokenService.getToken();
       if (!!token && !this.jwtHelper.isTokenExpired(token)) return true;
       return false;
     }
+    
 
 
   
     public login(loginModel: LoginModel): Observable<boolean> {
       return this.http
-        .post<AuthenticatedResponse>(`/token`, loginModel)
+        .post<AuthenticatedResponse>(`http://localhost:8080/api/auth/login`, loginModel)
         .pipe(
           map((res: AuthenticatedResponse) => {
             if (!res) return false;
@@ -62,7 +64,7 @@ import { JwtModule } from '@auth0/angular-jwt';
   
     private setUser(auth: AuthenticatedResponse | null): void {
       if (!auth) return;
-      const decodeToken = this.jwtHelper.decodeToken(auth.token);
+      const decodeToken = this.jwtHelper.decodeToken(auth.authenticationToken);
       const user: User = {
         id: decodeToken['userId'],
       };

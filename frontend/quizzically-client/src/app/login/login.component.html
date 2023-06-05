@@ -6,14 +6,14 @@
             <div class="card-body p-5 py-3 text-center h-80">
   
               <h3 class="mb-5">Panel logowania</h3>
-  
+              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
               <div class="form-outline mb-4">
-                <input type="email" id="typeEmailX-2" class="form-control form-control-lg" [(ngModel)]="email" name="email" />
-                <label class="form-label" for="typeEmailX-2">Email</label>
+                <input type="email" id="typeEmailX-2" class="form-control form-control-lg" formControlName="username" />
+                <label class="form-label" for="typeEmailX-2">Login</label>
               </div>
               
               <div class="form-outline mb-4">
-                <input type="password" id="typePasswordX-2" class="form-control form-control-lg" [(ngModel)]="password" name="password" />
+                <input type="password" id="typePasswordX-2" class="form-control form-control-lg" formControlName="password" />
                 <label class="form-label" for="typePasswordX-2">Hasło</label>
               </div>
               
@@ -24,7 +24,9 @@
   
               <button class="quizzically-secondary-button"
                 type="submit" (click)="openSignUpPage()">Zarejestruj się</button>
+              </form>
             </div>
+          
           </div>
         </div>
       </div>

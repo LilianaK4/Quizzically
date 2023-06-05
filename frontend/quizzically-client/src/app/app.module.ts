@@ -10,6 +10,7 @@ import { QuestionComponent } from './question/question.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from './environments/environment';
+import { MainMenuComponent } from './main-menu/main-menu.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -23,6 +24,7 @@ export function tokenGetter() {
     LoginComponent,
     SignUpComponent,
     QuestionComponent,
+    MainMenuComponent,
     
   ],
   imports: [
