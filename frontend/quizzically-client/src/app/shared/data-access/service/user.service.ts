@@ -10,9 +10,6 @@ import { SignUpModel } from 'src/app/models/signUp.model';
 import { JwtModule } from '@auth0/angular-jwt';
 
 
-
-
-
 @Injectable({
     providedIn: 'root',
   })
@@ -42,8 +39,6 @@ import { JwtModule } from '@auth0/angular-jwt';
     }
     
 
-
-  
     public login(loginModel: LoginModel): Observable<boolean> {
       return this.http
         .post<AuthenticatedResponse>(`http://localhost:8080/api/auth/login`, loginModel)
@@ -66,7 +61,7 @@ import { JwtModule } from '@auth0/angular-jwt';
       if (!auth) return;
       const decodeToken = this.jwtHelper.decodeToken(auth.authenticationToken);
       const user: User = {
-        id: decodeToken['userId'],
+        id: decodeToken['id'],
       };
       this.user.next(user);
     }

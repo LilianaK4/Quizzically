@@ -1,19 +1,24 @@
 package pl.lilianakrol.quizzically.controllers;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import pl.lilianakrol.quizzically.dto.QuizRequest;
+import pl.lilianakrol.quizzically.dto.QuizResponse;
+import pl.lilianakrol.quizzically.dto.QuizResultRequest;
 import pl.lilianakrol.quizzically.models.Quiz;
+import pl.lilianakrol.quizzically.service.QuizService;
 
 @RestController
 @RequestMapping("/api/quiz")
+@AllArgsConstructor
 public class QuizController {
+
+
+     private QuizService quizService;
+
+
 
      @PostMapping()
      Quiz createQuiz(@RequestBody Quiz quiz)
@@ -38,6 +43,28 @@ public class QuizController {
      {
      return;
      }
+
+
+     //Generate new quiz
+     @GetMapping("/newQuiz")
+     public ResponseEntity<QuizResponse> getQuiz(@RequestBody QuizRequest quizRequest) {
+          QuizResponse quizResponse = quizService.newQuiz(quizRequest);
+          return ResponseEntity.ok(quizResponse);
+     }
+
+
+     /*
+     @PostMapping("/result")
+     public ResponseEntity<Boolean> saveQuizResult(@RequestBody QuizResultRequest quizResultRequest) {
+          int totalPoints = quizResultRequest.getTotalPoints();
+          Long quizId = quizResultRequest.getQuizId();
+          Long userId = quizResultRequest.getUserId();
+
+          boolean savedSuccessfully = quizHistoryService.saveQuizHistory(totalPoints, quizId, userId);
+
+          return ResponseEntity.ok(savedSuccessfully);
+     }
+*/
 
 
 }

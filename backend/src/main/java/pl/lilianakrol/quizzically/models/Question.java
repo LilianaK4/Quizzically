@@ -1,5 +1,6 @@
 package pl.lilianakrol.quizzically.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,4 +21,9 @@ public class Question {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "question_id")
     private List<Answer> answers;
+
+
+    @ManyToMany(mappedBy = "questions")
+    @JsonIgnore
+    private List<Quiz> quizzes;
 }

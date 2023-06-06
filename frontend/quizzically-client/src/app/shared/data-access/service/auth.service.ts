@@ -7,6 +7,7 @@ import { AuthenticatedResponse } from 'src/app/models/authenticated-response.mod
 import { TokenService } from './token.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { RefreshToken } from 'src/app/models/refreshToken.model';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,6 @@ export class AuthService {
     username: ''
   };
 
-  
 
   private authLogout: RefreshToken = {
     refreshToken: '',
@@ -32,7 +32,7 @@ export class AuthService {
   
 
   constructor(private httpClient: HttpClient, private tokenService: TokenService,
-    private jwtHelper: JwtHelperService) {
+    private jwtHelper: JwtHelperService, private userService: UserService) {
   }
 
 
@@ -45,7 +45,6 @@ export class AuthService {
       .pipe(
         map(data => {
           this.tokenService.setToken(data);
-
           this.loggedIn.emit(true);
           this.username.emit(data.username);
           return true;

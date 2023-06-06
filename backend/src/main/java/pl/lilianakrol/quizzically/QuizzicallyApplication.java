@@ -7,10 +7,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@EnableJpaRepositories
+
 @SpringBootApplication
 @EnableAsync
 @EntityScan("pl.lilianakrol.quizzically.models")
+@EnableJpaRepositories(basePackages = "pl.lilianakrol.quizzically.repositories")
 public class QuizzicallyApplication {
 
     public static void main(String[] args) {

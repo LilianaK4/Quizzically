@@ -11,6 +11,7 @@ export class MainMenuComponent implements OnInit {
   
   isLoggedIn: boolean = false;
   username: string = '';
+  userId: string = '';
 
   constructor(private authService: AuthService, private router: Router) { }
 

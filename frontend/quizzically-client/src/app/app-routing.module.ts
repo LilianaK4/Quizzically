@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
-import { QuestionComponent } from './question/question.component';
+import { QuestionComponent } from './quiz/question/question.component';
 import { AuthGuard } from './shared/auth/auth.guard';
 import { SignUpComponent } from './sign-up/sign-up.component';
 

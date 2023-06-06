@@ -6,11 +6,13 @@ import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { QuestionComponent } from './question/question.component';
+import { QuestionComponent } from './quiz/question/question.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from './environments/environment';
 import { MainMenuComponent } from './main-menu/main-menu.component';
+import { GameComponent } from './quiz/game/game.component';
+import { SummaryComponent } from './quiz/summary/summary.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -25,6 +27,8 @@ export function tokenGetter() {
     SignUpComponent,
     QuestionComponent,
     MainMenuComponent,
+    GameComponent,
+    SummaryComponent,
     
   ],
   imports: [
