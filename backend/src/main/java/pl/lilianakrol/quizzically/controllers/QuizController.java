@@ -46,7 +46,7 @@ public class QuizController {
 
 
      //Generate new quiz
-     @GetMapping("/newQuiz")
+     @PostMapping("/newQuiz")
      public ResponseEntity<QuizResponse> getQuiz(@RequestBody QuizRequest quizRequest) {
           QuizResponse quizResponse = quizService.newQuiz(quizRequest);
           return ResponseEntity.ok(quizResponse);

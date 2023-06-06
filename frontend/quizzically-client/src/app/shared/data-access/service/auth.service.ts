@@ -55,6 +55,7 @@ export class AuthService {
 
   logout() {
     this.tokenService.clearToken();
+    this.userService.clearUsername();
     this.authLogout.refreshToken = this.auth.refreshToken;
     this.authLogout.username = this.auth.username;
     this.httpClient.post('http://localhost:8080/api/auth/logout', this.authLogout,

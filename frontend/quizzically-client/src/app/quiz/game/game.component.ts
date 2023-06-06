@@ -1,5 +1,11 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Question } from 'src/app/models/question.model';
+import { QuizResponse } from 'src/app/models/quiz.model';
+import { AuthService } from 'src/app/shared/data-access/service/auth.service';
+import { QuizService } from 'src/app/shared/data-access/service/quiz.service';
+import { UserService } from 'src/app/shared/data-access/service/user.service';
+
 
 @Component({
   selector: 'app-game',
@@ -7,16 +13,74 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
-  quiz: any;
-  currentQuestion: any;
-  score: number = 0;
+  quiz: QuizResponse;
+  currentQuestion: number;
+  score: number;
+  username: string | null;
 
-  constructor(private http: HttpClient) {}
 
-  ngOnInit() {
-    this.http.get('/newQuiz').subscribe((response: any) => {
-      this.quiz = response;
-      this.currentQuestion = this.quiz.questions[0];
+  constructor(
+    private router: Router,
+    private quizService: QuizService,
+    private authService: AuthService,
+    private userService: UserService
+  ) { 
+    this.quiz = {} as QuizResponse;
+    this.currentQuestion = 1;
+    this.score = 0;
+    this.username = this.userService.getUsername();
+ 
+        
+    /*
+    this.userService.user$.subscribe(res => {
+      if (res) {
+        this.username = res.username || '';
+       
+
+      }
     });
+*/
+
+  }
+
+
+  ngOnInit(): void {
+    // Pobranie danych quizu z serwera
+    /*
+        this.userService.user$.subscribe(res => {
+      if (res) {
+        this.username = res.username || '';
+       
+
+      }
+    });
+    */
+    this.quizService.getNewQuiz(this.userService.getUsername()?.toString() ?? '').subscribe(quiz => {
+      this.quiz = quiz;
+      this.startQuiz();
+    });
+    this.goToNextQuestion();
+
+  }
+
+  startQuiz(): void {
+    // Inicjalizacja stanu gry
+    this.score = 0;
+    this.currentQuestion = 0; // Ustawiamy na 0, bo indeksowanie tablic zazwyczaj zaczyna się od 0
+    this.router.navigate(['question', this.currentQuestion + 1]);
+  }
+
+  updateScore(newScore: number): void {
+    this.score = newScore;
+  }
+
+  goToNextQuestion(): void {
+    const totalQuestions = 10;
+    if (this.currentQuestion < totalQuestions - 1) {
+      this.currentQuestion++;
+      this.router.navigate(['question', this.currentQuestion + 1]);
+    } else {
+      this.router.navigate(['summary']);
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Question } from 'src/app/models/question.model';
-import { Quiz } from 'src/app/models/quiz.model';
+import { QuizResponse } from 'src/app/models/quiz.model';
 
 @Component({
   selector: 'app-question',
@@ -10,10 +10,10 @@ import { Quiz } from 'src/app/models/quiz.model';
 export class QuestionComponent {
   @Input() question: any;
   selectedAnswers: any;
-  quiz: Quiz;
+  quiz: QuizResponse;
 
   constructor() {
-    this.quiz = new Quiz(0, []); // Inicjalizacja właściwości quiz
+    this.quiz = {} as QuizResponse; // Inicjalizacja właściwości quiz
     this.question = new Question(0, '', []);
     this.selectedAnswers = [];
   }

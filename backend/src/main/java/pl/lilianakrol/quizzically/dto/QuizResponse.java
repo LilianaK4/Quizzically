@@ -12,4 +12,7 @@ import java.util.List;
 public class QuizResponse {
     private Long quizId;
     private List<Question> questions;
+
+
 }
+
