@@ -1,12 +1,13 @@
-export class Answer {
+export interface Answer {
     id: number;
     content: string;
-    correct: boolean;
-  
+    isCorrect: boolean;
+  /*
     constructor(id: number, content: string, correct: boolean) {
       this.id = id;
       this.content = content;
-      this.correct = correct;
+      this.isCorrect = correct;
     }
+    */
   }
   

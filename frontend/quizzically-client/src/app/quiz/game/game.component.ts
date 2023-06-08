@@ -5,6 +5,8 @@ import { QuizResponse } from 'src/app/models/quiz.model';
 import { AuthService } from 'src/app/shared/data-access/service/auth.service';
 import { QuizService } from 'src/app/shared/data-access/service/quiz.service';
 import { UserService } from 'src/app/shared/data-access/service/user.service';
+import { ActivatedRoute } from '@angular/router';
+
 
 
 @Component({
@@ -23,38 +25,21 @@ export class GameComponent implements OnInit {
     private router: Router,
     private quizService: QuizService,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private route: ActivatedRoute
   ) { 
     this.quiz = {} as QuizResponse;
-    this.currentQuestion = 1;
+    this.currentQuestion = 0;
     this.score = 0;
     this.username = this.userService.getUsername();
  
         
-    /*
-    this.userService.user$.subscribe(res => {
-      if (res) {
-        this.username = res.username || '';
-       
-
-      }
-    });
-*/
-
   }
 
 
   ngOnInit(): void {
     // Pobranie danych quizu z serwera
-    /*
-        this.userService.user$.subscribe(res => {
-      if (res) {
-        this.username = res.username || '';
-       
 
-      }
-    });
-    */
     this.quizService.getNewQuiz(this.userService.getUsername()?.toString() ?? '').subscribe(quiz => {
       this.quiz = quiz;
       this.startQuiz();
@@ -78,7 +63,7 @@ export class GameComponent implements OnInit {
     const totalQuestions = 10;
     if (this.currentQuestion < totalQuestions - 1) {
       this.currentQuestion++;
-      this.router.navigate(['question', this.currentQuestion + 1]);
+      this.router.navigate(['question', this.currentQuestion], { relativeTo: this.route.parent });
     } else {
       this.router.navigate(['summary']);
     }

@@ -29,8 +29,7 @@ export class MainMenuComponent implements OnInit {
   }
 
   startQuiz(): void {
-    console.log("main-menu username: " +this.username);
-    this.router.navigate(['quiz',this.username]); 
+    this.router.navigate(['quiz']); 
   }
 
 }

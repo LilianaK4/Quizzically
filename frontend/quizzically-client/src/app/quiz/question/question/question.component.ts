@@ -14,7 +14,7 @@ export class QuestionComponent {
 
   constructor() {
     this.quiz = {} as QuizResponse; // Inicjalizacja właściwości quiz
-    this.question = new Question(0, '', []);
+    this.question = {} as Question;
     this.selectedAnswers = [];
   }
 

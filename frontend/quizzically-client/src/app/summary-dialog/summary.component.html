@@ -1,0 +1,9 @@
+<div class="points-container d-flex flex-column justify-content-center align-items-center">
+  <button type="button" class="btn-close" aria-label="Close" (click)="navigateToMainMenu()"></button>
+  <div class="modal-header">
+      <h3 class="modal-title">Your result:</h3>       
+  </div>
+  <div class="modal-body pb-4">
+      <h2>{{score}}/100 points {{countPercentageResult()}}</h2>
+  </div>
+</div>
