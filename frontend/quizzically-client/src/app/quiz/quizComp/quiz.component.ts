@@ -6,7 +6,7 @@ import { QuizService } from 'src/app/shared/data-access/service/quiz.service';
 import { UserService } from 'src/app/shared/data-access/service/user.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SummaryComponent } from '../../summary-dialog/summary.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, withHashLocation } from '@angular/router';
 
 
 
@@ -23,7 +23,6 @@ export class QuizComponent implements OnInit {
   selectedAnswer: Answer; // Wybrana odpowiedź przez użytkownika
   score: number; // Suma punktów
 
-  //summaryDialogRef?: MatDialogRef<SummaryComponent>;
 
   
 
@@ -44,42 +43,35 @@ export class QuizComponent implements OnInit {
 
   
 
-  ngOnInit() {
-    //this.score = 0;
-    this.quizService.getNewQuiz(this.userService.getUsername() ?? '').subscribe((data: QuizResponse) => {
-      this.quiz = data;
-      this.questions = data.questions;
-      this.questionIndex = 0;
-      this.currentQuestion = this.questions[this.questionIndex];
+
+ngOnInit() {
+  this.quizService.getNewQuiz(this.userService.getUsername() ?? '').subscribe((data: QuizResponse) => {
+    this.quiz = data;
+    this.questions = data.questions;
+    this.questionIndex = 0;
+
+
+    this.questions.forEach((question: Question) => {
+
+      question.answers = question.answers.map((answer: Answer) => {
+        const correct = answer.correct; 
+        return { ...answer, correct: correct };
+      });
     });
-  }
+
+    this.currentQuestion = this.questions[this.questionIndex];
+  });
+}
+
+
+
   
-  /*
-
-  goToNextQuestion() {
-    if (this.selectedAnswer && this.selectedAnswer.isCorrect) {
-      this.score += 10;
-    }
-
-    this.selectedAnswer = {} as Answer;
-
-    //this.questionIndex++;
-    if (this.questionIndex < this.questions.length-1) {
-      this.questionIndex++;
-      this.currentQuestion = this.questions[this.questionIndex];
-    } else {
-      this.openSummaryDialog();
-    }
-  }
-
-*/
 
 goToNextQuestion() {
 
   const previousAnswer = this.selectedAnswer; // Poprzednia odpowiedź
 
-  console.log("POPRAWNOSCI: " + this.selectedAnswer.isCorrect)
-  if (previousAnswer && previousAnswer.isCorrect) {
+  if (previousAnswer && previousAnswer.correct) {
     this.score += 10;
   }
 
@@ -87,18 +79,22 @@ goToNextQuestion() {
 
   if (this.questionIndex < this.questions.length - 1) {
     this.questionIndex++;
+    
+    
     this.currentQuestion = this.questions[this.questionIndex];
+
+
+
   } else {
     this.getResultsForQuiz(this.quiz.quizId);
   }
 
-  console.log('POINTS: ' + this.score);
 }
 
 
+
+
 openSummary() {
-  console.log("TO SIE WYWOLUJE OPENSUMMARYDIALOG")
-   //this.router.navigateByUrl('/quiz/summary', { state: { score: this.score } });
     this.router.navigate(['/quiz/summary', this.score]);
 }
 
@@ -111,13 +107,19 @@ getResultsForQuiz(idquiz: number): void{
 }
 
 
-  selectAnswer(answId: number) {
-    this.currentQuestion.answers.forEach((answ: Answer, i: number) => {
-      if(answ.id == answId) {
-        this.selectedAnswer = answ;
-      }
-    });
-  }
+selectAnswer(answId: number) {
+  this.questions[this.questionIndex].answers.forEach((answ: Answer, i: number) => {
+
+    if (answ.id === answId) {
+      this.selectedAnswer = {
+        id: answ.id,
+        content: answ.content,
+        correct: answ.correct
+      };
+    }
+  });
+}
+
 
   
 

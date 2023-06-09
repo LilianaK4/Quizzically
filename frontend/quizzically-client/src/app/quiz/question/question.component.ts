@@ -23,6 +23,7 @@ export class QuestionComponent {
   }
 
   onNextQuestion() {
+    console.log("W QUESTION COMPONENT"  + this.selectedAnswers)
     // Sprawdź, czy wybrana odpowiedź jest poprawna i zwiększ licznik punktów
     if (this.selectedAnswers.correct) {
       // Zwiększ punktację

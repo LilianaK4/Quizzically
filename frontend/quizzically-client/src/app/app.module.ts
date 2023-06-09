@@ -10,13 +10,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from './environments/environment';
 import { MainMenuComponent } from './main-menu/main-menu.component';
-import { GameComponent } from './quiz/game/game.component';
 import { QuizComponent } from './quiz/quizComp/quiz.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { QuestionComponent } from './quiz/question/question/question.component';
+import { QuestionComponent } from './quiz/question/question.component';
 
 
 
@@ -32,7 +31,6 @@ export function tokenGetter() {
     LoginComponent,
     SignUpComponent,
     MainMenuComponent,
-    GameComponent,
     QuizComponent,
     QuestionComponent,
     
