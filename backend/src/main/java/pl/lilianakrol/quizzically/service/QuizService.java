@@ -26,8 +26,6 @@ public class QuizService {
 
 
     public QuizResponse newQuiz(QuizRequest quizRequest) {
-        System.out.println("\n\n\n\n!!!!!!!!    " + quizRequest.getUsername() + "    !!!!!!!!!!!!!!!!!\n\n\n\n");
-
         Optional<User> userOptional = userRepository.findByUsername(quizRequest.getUsername());
 
         User user = userOptional.orElseThrow(() -> new IllegalArgumentException("Invalid username."));
@@ -39,8 +37,6 @@ public class QuizService {
         quiz.setStartTime(LocalDateTime.now());
         quiz.setScore(0);
         quiz.setQuestions(questions);
-
-
 
         quizRepository.save(quiz);
 
