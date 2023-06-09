@@ -1,5 +1,6 @@
 package pl.lilianakrol.quizzically.service;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.lilianakrol.quizzically.models.Question;
@@ -8,6 +9,7 @@ import pl.lilianakrol.quizzically.repositories.QuestionRepository;
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 public class QuestionService {
     private final QuestionRepository questionRepository;

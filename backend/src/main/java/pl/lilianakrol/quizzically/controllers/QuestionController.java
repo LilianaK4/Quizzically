@@ -11,7 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
+import pl.lilianakrol.quizzically.exceptions.QuizzicallyException;
 import pl.lilianakrol.quizzically.models.Question;
+import pl.lilianakrol.quizzically.models.Quiz;
+import pl.lilianakrol.quizzically.repositories.QuestionRepository;
+import pl.lilianakrol.quizzically.repositories.QuizRepository;
 import pl.lilianakrol.quizzically.service.QuestionService;
 
 import java.util.List;
@@ -23,6 +27,9 @@ import java.util.List;
 public class QuestionController {
 
     QuestionService questionService;
+    private QuizRepository quizRepository;
+    private QuestionRepository questionRepository;
+
     @PostMapping()
     public Question createQuestion(@RequestBody Question question) {
         return questionService.createQuestion(question);
@@ -45,6 +52,7 @@ public class QuestionController {
     public List<Question> getAll() {
         return questionService.getAllQuestions();
     }
+
 
 
 

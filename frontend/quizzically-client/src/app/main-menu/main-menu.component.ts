@@ -11,6 +11,7 @@ export class MainMenuComponent implements OnInit {
   
   isLoggedIn: boolean = false;
   username: string = '';
+  userId: string = '';
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -18,7 +19,6 @@ export class MainMenuComponent implements OnInit {
     this.authService.loggedIn.subscribe((data: boolean) => this.isLoggedIn = data);
     this.authService.username.subscribe((data: string) => this.username = data);
     this.isLoggedIn = this.authService.isLoggedIn();
-    this.username = this.authService.getUserName();
   }
 
 
@@ -26,6 +26,10 @@ export class MainMenuComponent implements OnInit {
     this.authService.logout();
     this.isLoggedIn = false;
     this.router.navigateByUrl('/login');
+  }
+
+  startQuiz(): void {
+    this.router.navigate(['quiz']); 
   }
 
 }

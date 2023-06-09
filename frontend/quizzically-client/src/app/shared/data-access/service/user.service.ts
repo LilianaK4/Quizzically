@@ -10,18 +10,15 @@ import { SignUpModel } from 'src/app/models/signUp.model';
 import { JwtModule } from '@auth0/angular-jwt';
 
 
-
-
-
 @Injectable({
     providedIn: 'root',
   })
   export class UserService {
-    registerUser(userData: SignUpModel) {
-      throw new Error('Method not implemented.');
-    }
+   
+   
     private user = new BehaviorSubject<User | null>(null);
     public user$ = this.user.asObservable();
+
   
     constructor(
       private http: HttpClient,
@@ -32,29 +29,36 @@ import { JwtModule } from '@auth0/angular-jwt';
       if (!!token && !this.jwtHelper.isTokenExpired(token))
         this.setUser({ authenticationToken: token } as AuthenticatedResponse);
       else this.tokenService.clearToken();
+
+      
     }
-    
+
+  
+   
   
     public get isUserAuthenticated(): boolean {
       const token = this.tokenService.getToken();
       if (!!token && !this.jwtHelper.isTokenExpired(token)) return true;
       return false;
     }
+
+
     
 
-
-  
     public login(loginModel: LoginModel): Observable<boolean> {
-      return this.http
+      const resp = this.http
         .post<AuthenticatedResponse>(`http://localhost:8080/api/auth/login`, loginModel)
         .pipe(
           map((res: AuthenticatedResponse) => {
             if (!res) return false;
             this.tokenService.setToken(res);
             this.setUser(res);
+            localStorage.setItem('username', res.username);
             return true;
           })
         );
+    
+        return resp;
     }
   
     public logout(): void {
@@ -66,15 +70,27 @@ import { JwtModule } from '@auth0/angular-jwt';
       if (!auth) return;
       const decodeToken = this.jwtHelper.decodeToken(auth.authenticationToken);
       const user: User = {
-        id: decodeToken['userId'],
+        id: decodeToken['id'],
+        username : auth.username,
       };
       this.user.next(user);
+    }
+
+
+    public getUsername(): string | null {
+      return localStorage.getItem('username');
     }
   
 
   
     private clearUser() {
       this.user.next(null);
+    }
+
+  
+
+    public clearUsername(): void {
+      localStorage.removeItem('username');
     }
   }
   
