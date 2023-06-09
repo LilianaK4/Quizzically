@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.lilianakrol.quizzically.dto.QuizRequest;
 import pl.lilianakrol.quizzically.dto.QuizResponse;
+import pl.lilianakrol.quizzically.dto.ScoreUpdateRequest;
+import pl.lilianakrol.quizzically.exceptions.QuizzicallyException;
 import pl.lilianakrol.quizzically.models.Question;
 import pl.lilianakrol.quizzically.models.Quiz;
 import pl.lilianakrol.quizzically.models.User;
@@ -71,6 +73,19 @@ public class QuizService {
         }
 
         return questions;
+    }
+
+
+    public void updateQuizScore(Long quizId, ScoreUpdateRequest scoreUpdateRequest) {
+        Optional<Quiz> optionalQuiz = quizRepository.findById(quizId);
+
+        if (optionalQuiz.isPresent()) {
+            Quiz quiz = optionalQuiz.get();
+            quiz.setScore(scoreUpdateRequest.getScore());
+            quizRepository.save(quiz);
+        } else {
+            throw new QuizzicallyException("Quiz not found");
+        }
     }
 
 

@@ -7,8 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import pl.lilianakrol.quizzically.dto.QuizRequest;
 import pl.lilianakrol.quizzically.dto.QuizResponse;
 import pl.lilianakrol.quizzically.dto.QuizResultRequest;
+import pl.lilianakrol.quizzically.dto.ScoreUpdateRequest;
 import pl.lilianakrol.quizzically.models.Quiz;
 import pl.lilianakrol.quizzically.service.QuizService;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/quiz")
@@ -53,6 +56,7 @@ public class QuizController {
      }
 
 
+
      /*
      @PostMapping("/result")
      public ResponseEntity<Boolean> saveQuizResult(@RequestBody QuizResultRequest quizResultRequest) {
@@ -64,7 +68,13 @@ public class QuizController {
 
           return ResponseEntity.ok(savedSuccessfully);
      }
-*/
+      */
 
+
+     @PatchMapping("/{quizId}/score")
+     public ResponseEntity<String> updateQuizScore(@PathVariable Long quizId, @RequestBody ScoreUpdateRequest scoreUpdateRequest) {
+          quizService.updateQuizScore(quizId, scoreUpdateRequest);
+          return ResponseEntity.ok().build();
+     }
 
 }

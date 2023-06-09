@@ -39,8 +39,4 @@ public class Quiz {
     @JsonIgnore
     private List<Question> questions;
 
-    //@JsonIgnore // Dodaj adnotację @JsonIgnore, aby uniknąć cyklicznej zależności
-    //public List<Question> getQuestions() {
-        //return questions;
-    //}
 }

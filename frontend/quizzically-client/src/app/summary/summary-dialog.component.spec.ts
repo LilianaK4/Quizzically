@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SummaryDialogComponent } from './summary-dialog.component';
+import { SummaryComponent } from './summary.component';
 
 describe('SummaryDialogComponent', () => {
-  let component: SummaryDialogComponent;
-  let fixture: ComponentFixture<SummaryDialogComponent>;
+  let component: SummaryComponent;
+  let fixture: ComponentFixture<SummaryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SummaryDialogComponent ]
+      declarations: [ SummaryComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SummaryDialogComponent);
+    fixture = TestBed.createComponent(SummaryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

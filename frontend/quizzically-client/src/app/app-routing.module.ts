@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { QuizComponent } from './quiz/quizComp/quiz.component';
-import { SummaryComponent } from './summary-dialog/summary.component';
+import { SummaryComponent } from './summary/summary.component';
 import { AuthGuard } from './shared/auth/auth.guard';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { QuestionComponent } from './quiz/question/question.component';
