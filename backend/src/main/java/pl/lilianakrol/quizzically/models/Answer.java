@@ -12,8 +12,6 @@ public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private String content;
-
     private boolean correct;
 }

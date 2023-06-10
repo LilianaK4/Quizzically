@@ -3,22 +3,18 @@ package pl.lilianakrol.quizzically.service;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import pl.lilianakrol.quizzically.exceptions.QuizzicallyException;
-import pl.lilianakrol.quizzically.models.NotificationEmail;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.stereotype.Service;
+import pl.lilianakrol.quizzically.exceptions.QuizzicallyException;
+import pl.lilianakrol.quizzically.models.NotificationEmail;
 
 @Service
 @AllArgsConstructor
 @Slf4j
 public class MailService {
-
-
     private final JavaMailSender mailSender;
 
     @RabbitListener(queues = "quizzically_verification_queue")

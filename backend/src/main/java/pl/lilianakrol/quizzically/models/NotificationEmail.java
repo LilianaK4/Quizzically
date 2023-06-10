@@ -10,6 +10,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NotificationEmail implements Serializable {
+
     private String subject;
     private String recipient;
     private String body;
