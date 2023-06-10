@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -15,9 +15,7 @@ export class SummaryComponent {
 
 
   constructor(public activeModal: NgbActiveModal, private route: ActivatedRoute, private router: Router) {
-    
   }
-
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {

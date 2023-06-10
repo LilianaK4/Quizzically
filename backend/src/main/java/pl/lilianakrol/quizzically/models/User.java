@@ -21,18 +21,16 @@ public class User {
     @Column(name = "surname", nullable = false)
     private String surname;
 
-
     @Column(name = "username", nullable = false)
     private String username;
-
 
     @Column(name = "email", nullable = false)
     private String email;
 
     @Column(name = "password", nullable = false)
     private String password;
-    private Instant created;
 
+    private Instant created;
     private boolean enabled;
 
 

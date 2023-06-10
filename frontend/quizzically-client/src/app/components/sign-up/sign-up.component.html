@@ -12,7 +12,6 @@
           <div class="card-body p-5 py-3 text-center h-60">
 <form [formGroup]="signupForm" (ngSubmit)="signup()">
             <h3 class="mb-3">Panel rejestracji</h3>
-
             <div class="row mb-1">
               <div class="col">
                 <div class="form-outline">
@@ -27,17 +26,14 @@
                 </div>
               </div>
             </div>
-
             <div class="form-outline mb-1">
               <input type="text" id="username" formControlName="username" class="form-control form-control-lg" />
               <label class="form-label" for="username">Login</label>
             </div>
-
             <div class="form-outline mb-1">
               <input type="email" id="email" formControlName="email" class="form-control form-control-lg" />
               <label class="form-label" for="email">Email</label>
             </div>
-
             <div class="row mb-1">
               <div class="col">
                 <div class="form-outline">
@@ -49,25 +45,14 @@
                 <div class="form-outline">
                   <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control form-control-lg" />
                   <label class="form-label" for="confirmPassword">Powtórz hasło</label>
-               
-                 
                 </div>
               </div>
             </div>
-
             <button class="quizzically-primary-button" type="submit">Zarejestruj</button>
-
             <hr class="my-4">
-
             <button class="quizzically-secondary-button" type="submit" (click)="openLoginPage()">Panel logowania</button>
-
           </form>
           </div>
-
-        
-
-
-
         </div>
       </div>
     </div>

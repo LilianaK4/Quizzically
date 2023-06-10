@@ -12,8 +12,6 @@ import java.util.Optional;
 @Repository
 public interface QuizRepository extends JpaRepository<Quiz, Long> {
 
-    List<Quiz> findByUser(User user);
-
     Optional<Quiz> findById(Long id);
 
     List<Quiz> findByUserUsername(String username);

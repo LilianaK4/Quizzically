@@ -2,28 +2,27 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { LoginComponent } from './login/login.component';
+import { HeaderComponent } from './components/header/header.component';
+import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from './environments/environment';
-import { MainMenuComponent } from './main-menu/main-menu.component';
-import { QuizComponent } from './quiz/quizComp/quiz.component';
+import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { QuestionComponent } from './quiz/question/question.component';
-import { PointsComponent } from './points/points.component';
+import { PointsComponent } from './components/points/points.component';
+import { QuizComponent } from './components/quiz/quiz.component';
+import { ToastrConfig, ToastrModule } from 'ngx-toastr';
 
 
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
 }
-
 
 @NgModule({
   declarations: [
@@ -33,7 +32,6 @@ export function tokenGetter() {
     SignUpComponent,
     MainMenuComponent,
     QuizComponent,
-    QuestionComponent,
     PointsComponent,
     
   ],
@@ -52,6 +50,9 @@ export function tokenGetter() {
     }),
     BrowserAnimationsModule,
     MatDialogModule,
+    ToastrModule.forRoot({
+      timeOut: 1500
+    }),
   ],
   providers: [
     MatDialog,

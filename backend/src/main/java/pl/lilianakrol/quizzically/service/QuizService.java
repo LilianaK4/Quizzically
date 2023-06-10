@@ -13,7 +13,6 @@ import pl.lilianakrol.quizzically.models.User;
 import pl.lilianakrol.quizzically.repositories.QuestionRepository;
 import pl.lilianakrol.quizzically.repositories.QuizRepository;
 import pl.lilianakrol.quizzically.repositories.UserRepository;
-
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -29,9 +28,7 @@ public class QuizService {
 
     public QuizResponse newQuiz(QuizRequest quizRequest) {
         Optional<User> userOptional = userRepository.findByUsername(quizRequest.getUsername());
-
         User user = userOptional.orElseThrow(() -> new IllegalArgumentException("Invalid username."));
-
         List<Question> questions = generateQuestions();
 
         Quiz quiz = new Quiz();
@@ -49,17 +46,15 @@ public class QuizService {
         return quizResponse;
     }
 
-
-
     public List<Question> generateQuestions() {
         List<Question> questions = new ArrayList<>();
-        List<Question> allQuestions = questionRepository.findAll(); // Pobranie wszystkich pytań z bazy danych
+        List<Question> allQuestions = questionRepository.findAll();
 
         if (allQuestions.size() < 10) {
-            return questions; // Zwróć pustą listę, jeśli w bazie jest za mało pytań
+            return questions;
         }
 
-        // Wygenerowanie 10 losowych pytań
+        // 10 random questions
         Random random = new Random();
         Set<Integer> selectedIndexes = new HashSet<>();
 

@@ -1,7 +1,9 @@
 package pl.lilianakrol.quizzically.models;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.Instant;
 
@@ -10,7 +12,9 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 
 @NoArgsConstructor
 @Entity
-@Table(name = "token")
+@Getter
+@Setter
+@Table(name = "verification_token")
 public class VerificationToken {
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -20,36 +24,4 @@ public class VerificationToken {
     private User user;
     private Instant expiryDate;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Instant getExpiryDate() {
-        return expiryDate;
-    }
-
-    public void setExpiryDate(Instant expiryDate) {
-        this.expiryDate = expiryDate;
-    }
-
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public User getUser() {
-        return user;
-    }
 }

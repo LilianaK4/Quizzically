@@ -4,11 +4,10 @@ import { Question } from 'src/app/models/question.model';
 import { QuizResponse } from 'src/app/models/quiz.model';
 import { QuizService } from 'src/app/shared/data-access/service/quiz.service';
 import { UserService } from 'src/app/shared/data-access/service/user.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { SummaryComponent } from '../../summary/summary.component';
-import { ActivatedRoute, Router, withHashLocation } from '@angular/router';
+import { Router } from '@angular/router';
 import { ScoreUpdateRequest } from 'src/app/models/scoreUpdateRequest.model';
-import { LoginComponent } from 'src/app/login/login.component';
+import { ToastrService } from 'ngx-toastr';
+
 
 
 
@@ -29,8 +28,8 @@ export class QuizComponent implements OnInit {
   constructor(private quizService: QuizService, 
     private userService: UserService,
     private router: Router,
-    private route: ActivatedRoute,
-    private dialog: MatDialog) {
+    private toastr: ToastrService) 
+  {
     this.quiz = {} as QuizResponse;
     this.questions = [];
     this.currentQuestion = {} as Question;
@@ -40,17 +39,13 @@ export class QuizComponent implements OnInit {
   
   }
 
-
-
 ngOnInit() {
   this.quizService.getNewQuiz(this.userService.getUsername() ?? '').subscribe((data: QuizResponse) => {
     this.quiz = data;
     this.questions = data.questions;
     this.questionIndex = 0;
-
-
+  
     this.questions.forEach((question: Question) => {
-
       question.answers = question.answers.map((answer: Answer) => {
         const correct = answer.correct; 
         return { ...answer, correct: correct };
@@ -62,11 +57,13 @@ ngOnInit() {
 }
 
 goToNextQuestion() {
-
   const previousAnswer = this.selectedAnswer; 
 
   if (previousAnswer && previousAnswer.correct) {
     this.score += 10;
+    this.toastr.success("Poprawna odpowiedź!")
+  } else {
+    this.toastr.error("Błędna odpowiedź!")
   }
 
   this.selectedAnswer = {} as Answer;
