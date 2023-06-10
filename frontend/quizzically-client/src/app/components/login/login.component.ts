@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginModel } from '../models/login.model';
-import { UserService } from '../shared/data-access/service/user.service';
+import { LoginModel } from '../../models/login.model';
+import { UserService } from '../../shared/data-access/service/user.service';
 import { map } from 'rxjs/operators';
 
 @Component({

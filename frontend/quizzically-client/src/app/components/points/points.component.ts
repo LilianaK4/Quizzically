@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../shared/data-access/service/user.service';
+import { UserService } from '../../shared/data-access/service/user.service';
 
 @Component({
   selector: 'app-points',

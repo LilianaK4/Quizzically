@@ -4,8 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SignUpModel } from 'src/app/models/signUp.model';
 import { UserService } from 'src/app/shared/data-access/service/user.service';
-import { SignUpRequestModel } from '../models/signuUpRequest.model';
-import { AuthService } from '../shared/data-access/service/auth.service';
+import { SignUpRequestModel } from '../../models/signuUpRequest.model';
+import { AuthService } from '../../shared/data-access/service/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -19,7 +19,6 @@ export class SignUpComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private userService: UserService,
     private router: Router,
     private formBuilder: FormBuilder
   ) {
@@ -60,7 +59,6 @@ export class SignUpComponent implements OnInit {
       this.signUpModel.username = this.signupForm.get('username')?.value;
       this.signUpModel.password = this.signupForm.get('password')?.value;
       this.signUpModel.confirmPassword = this.signupForm.get('confirmPassword')?.value;
-  
       this.signUpRequestModel.name = this.signUpModel.firstName;
       this.signUpRequestModel.surname = this.signUpModel.lastName;
       this.signUpRequestModel.email = this.signUpModel.email;
