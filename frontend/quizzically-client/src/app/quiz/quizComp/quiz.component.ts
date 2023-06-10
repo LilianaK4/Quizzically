@@ -108,13 +108,15 @@ selectAnswer(answId: number) {
   });
 }
 
-
-
 private updateScore(quizId: number, score: number) {
 
   const scoreUpdateRequest = new ScoreUpdateRequest(score); 
   this.quizService.updateQuizScore(quizId, scoreUpdateRequest)
 
+}
+
+navigateToMainMenu(): void {
+  this.router.navigate(['/main-menu']);
 }
 
 

@@ -32,4 +32,8 @@ export class MainMenuComponent implements OnInit {
     this.router.navigate(['quiz']); 
   }
 
+  showTotalPoints(): void {
+    this.router.navigate(['total-points']); 
+  }
+
 }

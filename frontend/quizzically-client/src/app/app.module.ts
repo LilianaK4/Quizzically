@@ -16,6 +16,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { QuestionComponent } from './quiz/question/question.component';
+import { PointsComponent } from './points/points.component';
 
 
 
@@ -33,6 +34,7 @@ export function tokenGetter() {
     MainMenuComponent,
     QuizComponent,
     QuestionComponent,
+    PointsComponent,
     
   ],
   imports: [

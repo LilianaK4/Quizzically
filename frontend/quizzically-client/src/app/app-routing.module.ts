@@ -7,6 +7,7 @@ import { SummaryComponent } from './summary/summary.component';
 import { AuthGuard } from './shared/auth/auth.guard';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { QuestionComponent } from './quiz/question/question.component';
+import { PointsComponent } from './points/points.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -15,6 +16,8 @@ const routes: Routes = [
   { path: 'question', component: QuestionComponent },
   { path: 'main-menu', component: MainMenuComponent, canActivate: [AuthGuard] },
   { path: 'results/:idquiz/:score', component: SummaryComponent, canActivate: [AuthGuard] },
+  { path: 'total-points', component: PointsComponent, canActivate: [AuthGuard] },
+
   {
     path: 'quiz',
     component: QuizComponent,

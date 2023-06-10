@@ -16,6 +16,8 @@ public interface QuizRepository extends JpaRepository<Quiz, Long> {
 
     Optional<Quiz> findById(Long id);
 
+    List<Quiz> findByUserUsername(String username);
+
 
 
 }
